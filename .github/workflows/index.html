@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<!-- head starts-->
+<head>
+<meta charset="utf-8">
+<!-- title -->
+<title>Cost Calculator</title>
+<!-- script starts -->
+<script>
+<!-- variable initialised -->
+var costPerDay =0;
+
+<!-- function to calculate -->
+    function getCost() {
+
+<!-- variables -->
+        var radioButton;
+        var a =0;
+        var b =0;
+        var radioButton2;
+
+<!-- checking the selection of radio button. -->
+        for (var i = 1; i <= 3; i++) {
+
+            radioButton = document.getElementById("accommodation" + i);
+            if (radioButton.checked == true) {
+                selectedAnswer = i;
+                a++;
+            }
+
+        }
+<!-- validation of null radio buttons. -->
+		if(a == 0){
+	            	alert("The Accomodation field is mandatory. Please select an Accomodation Type.");
+	            	return false;
+            	}
+<!-- determining cost per day -->
+
+        if (selectedAnswer == 1) {
+            costPerDay = 95.5;
+        }
+      else if ((selectedAnswer == 2)) {
+            costPerDay = 140.3;
+        }
+      else if ((selectedAnswer == 3)) {
+            costPerDay = 170.7;
+        }
+
+
+<!-- check the season and increase the cost -->
+    checkSeason();
+
+<!-- Duration of the tour and adding the additional cost -->
+	        for (var i = 1; i <= 4; i++) {
+
+	            radioButton2 = document.getElementById("tourDuration" + i);
+	            if (radioButton2.checked == true) {
+	                selectedAnswer = i;
+	                b++;
+	            }
+	        }
+
+<!-- validating tour duration radio buttons. -->
+	        if (b==0){
+					        alert("The duration of the tour is mandatory. Please select the duration of the tour.");
+					        return false;
+			        }
+
+	        if (selectedAnswer == 1) {
+	            costPerDay = costPerDay * 4;
+	        }
+	      else if ((selectedAnswer == 2)) {
+	            costPerDay = costPerDay * 7;
+	        }
+	      else if ((selectedAnswer == 3)) {
+	            costPerDay = costPerDay * 14;
+	        }
+	      else if ((selectedAnswer == 4)) {
+	            costPerDay = costPerDay * 20;
+        }
+<!-- rounding up the cost -->
+    costPerDay = Math.round(costPerDay);
+
+    alert(" The total cost is: $ " +costPerDay);
+    }
+
+
+<!-- check if season check box is marked -->
+    function checkSeason() {
+        var checkbox;
+            checkbox = document.getElementById("offSeason");
+            if (checkbox.checked == true) {
+                costPerDay = costPerDay + 20;
+            }
+    }
+
+<!-- script ends -->
+</script>
+<!-- end head -->
+</head>
+<!-- body starts -->
+<body>
+<!-- Heading -->
+<h1>USA TOUR COST CALCULATOR</h1>
+<!-- Instructions -->
+<h4>Complete the following form below to calculate the cost of your tour of the United States.</h4>
+<!-- form starts -->
+<form>
+<p>
+<!-- radio buttons -->
+<label> Accomodation Type: </label> <br>
+<input type="radio" name="accType" value="Camping" id="accommodation1" > Camping<br>
+  <input type="radio" name="accType" value="BudgetHotel" id="accommodation2"> Budget Hotel<br>
+  <input type="radio" name="accType" value="premierHotel" id="accommodation3"> Premier Hotel</p>
+
+<!-- off season checkbox -->
+<p><input type="checkbox" id="offSeason" name="offSeason" value="season"> <label for="offSeason">Click here
+        if you will be travelling during the peak season of June to August</label><br> </p>
+
+<!-- duration of the tor radio button -->
+  <p>
+  <label> Duration of tour:</label> <br>
+  <input type="radio" name="tourDuration" value="four" id="tourDuration1" > 4 days, 1 state<br>
+    <input type="radio" name="tourDuration" value="seven" id="tourDuration2"> 7 days, 3 states<br>
+  <input type="radio" name="tourDuration" value="fourteen" id="tourDuration3"> 14 days, 12 states<br>
+  <input type="radio" name="tourDuration" value="twenty" id="tourDuration4"> 20 days, 18 states<br></p>
+
+<!-- submit button -->
+<p><input type="submit" value="Calculate"
+onClick="getCost();">
+<!-- reset button -->
+<input type="reset"></p>
+</form>
+</body>
+</html>
